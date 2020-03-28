@@ -36,12 +36,17 @@ cp /etc/xdg/picom.conf ~/.config/picom.conf
 
 ### Fonts
 
-I decided to install "Font-Awesome" and "Yosemite San Francisco Font"
-```shell 
+Fonts used: 
+ - Font-Awesome `sudo pacman -S ttf-font-awesome`
+ - [Yosemite San Francisco Font](https://github.com/supermarin/YosemiteSanFranciscoFont)
 
-sudo pacman -S ttf-font-awesome
+Just copy the Yosemite `*.ttf` into `/usr/shared/fonts/TTF`
+Don't forget to change the `~/.gtkrc-2.0` and `~/.config/gtk-3.0/settings.ini`
 
+To render the fonts in a better way :
+```shell
+sudo pacman -S freetype2
+sudo cp /etc/fonts/conf.avail/10-hinting-full.conf /etc/fonts/conf.d
+sudo cp /etc/fonts/conf.avail/10-sub-pixel-rgb.conf /etc/fonts/conf.d
+sudo cp /etc/fonts/conf.avail/11-lcdfilter-default.conf /etc/fonts/conf.d
 ```
-
-The Yosemite fonts are available into this repo.
-Just copy the .ttf into
