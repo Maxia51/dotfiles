@@ -11,6 +11,8 @@ Compositing window manager: Picom.
 
 ## Installation process
 
+### I3 
+
 I3 installation :
 ```shell
 
@@ -18,6 +20,10 @@ I3 installation :
 sudo pacman -S i3
 
 ```
+
+Then just copy the I3 configuration file in ~/.config/i3
+
+### Picom
 
 Picom installation :
 ```shell
@@ -28,5 +34,14 @@ cp /etc/xdg/picom.conf ~/.config/picom.conf
 
 ```
 
-I3 configuration :
-Just copy the i3 config file.
+### Fonts
+
+I decided to install "Font-Awesome" and "Yosemite San Francisco Font"
+```shell 
+
+sudo pacman -S ttf-font-awesome
+
+```
+
+The Yosemite fonts are available into this repo.
+Just copy the .ttf into
