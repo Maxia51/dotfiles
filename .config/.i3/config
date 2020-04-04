@@ -1,0 +1,263 @@
+###############################
+#      CONFIGURATION I3       #
+###############################
+
+# Please see https://i3wm.org/docs/userguide.html for a complete reference!
+
+set $mod Mod4
+
+###############################
+#          APPARENCE          #
+###############################
+# Focus la fenêtre au survol
+focus_follows_mouse no
+
+# Police à utiliser
+font pango: SFNS Display 10
+
+# Couleurs
+set_from_resource       $active       active
+set_from_resource       $inactive     secondary
+set_from_resource       $background   background
+set_from_resource       $foreground   foreground
+set_from_resource       $transparent   transparent
+
+# class			border	    backgr.   	text	       indicat   child_border
+client.focused          $background #2A2D3D     $inactive     #88C0D0   $active
+client.focused_inactive $background #2A2D3D 	$inactive    #5E6386   $inactive
+client.unfocused        $background #222431     $inactive      #34384D   $inactive
+client.urgent           $active     $active    	$background    #900000   $active
+client.placeholder      $background $background $foreground    #000000   $inactive
+client.background       $background
+
+# Fond d'écran
+exec_always --no-startup-id feh --bg-scale ~/Pictures/wallpaper.png
+
+###############################
+#         KEYBINDING          #
+###############################
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# start a terminal
+bindsym $mod+Return exec urxvt -e zsh
+
+# kill focused window
+bindsym $mod+Shift+A kill
+bindsym $alt+F4 kill
+bindsym $mod+Shift+Q kill
+
+# Rofi comme lanceur d'application
+bindsym $mod+d exec rofi -show run -display-run ":"
+
+# Changement du Focus
+bindsym $mod+j focus left
+bindsym $mod+k focus down
+bindsym $mod+l focus up
+bindsym $mod+m focus right
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# Déplacement des fenêtre
+bindsym $mod+Shift+j move left
+bindsym $mod+Shift+k move down
+bindsym $mod+Shift+l move up
+bindsym $mod+Shift+M move right
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# Changement du mode de split (vertical ou horizontal)
+bindsym $mod+h split h
+bindsym $mod+v split v
+
+# Permet de changer de mode
+bindsym $mod+f fullscreen toggle
+bindsym $mod+s layout stacking
+bindsym $mod+z layout tabbed
+bindsym $mod+x layout toggle split
+bindsym $mod+Shift+f floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+q focus parent
+
+# focus the child container
+# bindsym $mod+b focus child
+
+
+# Rechargement / Actualisation de la configuration
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+r restart
+
+# Quitter i3
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+# Ouvrir l'exploreur de fichier
+bindsym $mod+e exec nemo "$HOME"
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym j resize shrink width 5 px or 5 ppt
+        bindsym k resize grow height 5 px or 5 ppt
+        bindsym l resize shrink height 5 px or 5 ppt
+        bindsym m resize grow width 5 px or 5 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 5 px or 5 ppt
+        bindsym Down resize grow height 5 px or 5 ppt
+        bindsym Up resize shrink height 5 px or 5 ppt
+        bindsym Right resize grow width 5 px or 5 ppt
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+# Audio
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle # mute sound
+
+# Play / Pause Spotify
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioPause exec playerctl play-pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+
+# Capture d'écran
+bindsym Print exec xfce4-screenshooter
+
+###############################
+#        WORKSPACES           #
+###############################
+
+set_from_resource $monitorLeft i3.monitorLeft
+set_from_resource $monitorRight i3.monitorRight
+
+# Workspaces
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
+# Ecran associé à chaque Workspace
+workspace $ws1 output $monitorLeft
+workspace $ws2 output $monitorRight
+workspace $ws3 output $monitorRight
+workspace $ws4 output $monitorRight
+workspace $ws5 output $monitorRight
+workspace $ws6 output $monitorRight
+workspace $ws7 output $monitorRight
+workspace $ws8 output $monitorRight
+workspace $ws9 output $monitorRight
+workspace $ws10 output $monitorRight
+
+# Changement de Workspace
+bindsym $mod+ampersand workspace $ws1
+bindsym $mod+eacute workspace $ws2
+bindsym $mod+quotedbl workspace $ws3
+bindsym $mod+apostrophe workspace $ws4
+bindsym $mod+parenleft workspace $ws5
+bindsym $mod+minus workspace $ws6
+bindsym $mod+egrave workspace $ws7
+bindsym $mod+underscore workspace $ws8
+bindsym $mod+ccedilla workspace $ws9
+bindsym $mod+agrave workspace $ws10
+bindsym $mod+Mod2+KP_1 workspace number $ws1
+bindsym $mod+Mod2+KP_2 workspace number $ws2
+bindsym $mod+Mod2+KP_3 workspace number $ws3
+bindsym $mod+Mod2+KP_4 workspace number $ws4
+bindsym $mod+Mod2+KP_5 workspace number $ws5
+bindsym $mod+Mod2+KP_6 workspace number $ws6
+bindsym $mod+Mod2+KP_7 workspace number $ws7
+bindsym $mod+Mod2+KP_8 workspace number $ws8
+bindsym $mod+Mod2+KP_9 workspace number $ws9
+bindsym $mod+Mod2+KP_0 workspace number $ws10
+bindsym $mod+Tab workspace next
+bindsym $mode+Shift+Tab workspace prev
+bindsym $mod+Ctrl+Right workspace next
+bindsym $mod+Ctrl+Left workspace prev
+bindsym $mod+Ctrl+j workspace next
+bindsym $mod+Ctrl+m workspace prev
+
+# Déplacement vers un Workspace
+bindsym $mod+Shift+1 move container to workspace $ws1; workspace $ws1
+bindsym $mod+Shift+eacute move container to workspace $ws2; workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3; workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4; workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5; workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6; workspace $ws6
+bindsym $mod+Shift+egrave move container to workspace $ws7; workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
+bindsym $mod+Shift+ccedilla move container to workspace $ws9; workspace $ws9
+bindsym $mod+Shift+agrave move container to workspace $ws10; workspace $ws10
+
+# Taille des fenêtres flottantes
+floating_minimum_size 75 x 50
+floating_maximum_size -1 x -1
+
+# Force certaines apps à des wokspaces dédiés
+
+set_from_resource $code-app i3.codeApplications
+set_from_resource $web-app i3.webApplications
+set_from_resource $social-app i3.socialApplications
+set_from_resource $music-app i3.musicApplications
+set_from_resource $versioning-app i3.versioningApplications
+
+# Workspace 1 (Code)
+assign [class=$code-app] $ws1
+# Workspace 3 (Web)
+assign [class=$web-app] $ws3
+# Workspace 4 (Versioning)
+assign [class="GitKraken"] $ws4
+for_window [class="GitKraken"] focus
+
+# Workspace 8 (Music)
+assign [class=$music-app] $ws8
+# Workspace 9 (Tchat)
+assign [class=$social-app] $ws9
+
+# Force floating mode
+for_window [class="Nemo"] floating enable
+
+###############################
+#            MISC             #
+###############################
+# Splits "inteligent"
+# exec --no-startup-id ~/.config/i3/alternating_layouts.py
+# Applications au démarrage
+exec --no-startup-id compton
+exec --no-startup-id firefox
+exec --no-startup-id discord-canary
+# Pamac Manager a besoin de ça pour gérer l'authentification
+#exec --no-startup-id /usr/lib/polkit-gnome/polkit-kde-authentication-agent-1
+
+# I3 Gaps
+for_window [class="^.*"] border pixel 2
+for_window [class=".*"] title_format "  %title"
+gaps inner 10
+smart_borders on
+smart_gaps on
+
+# Redémarre polybar quand on redémarre i3
+exec_always --no-startup-id "killall polybar;polybar -r left & polybar -r right"
