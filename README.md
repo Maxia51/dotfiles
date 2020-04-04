@@ -70,6 +70,23 @@ done
 
 ```
 
+
+### Docker
+
+```shell
+
+# Docker
+sudo pacman -S docker
+sudo pacman -S docker-compose
+
+# Completion
+curl -fLo ~/.zprezto/modules/completion/external/src/_docker https://raw.githubusercontent.com/docker/cli/master/contrib/completion/zsh/_docker
+curl -fLo ~/.zprezto/modules/completion/external/src/_docker-compose https://raw.githubusercontent.com/docker/compose/master/contrib/completion/zsh/_docker-compose
+exec $SHELL -l
+compinit -i -c
+
+```
+
 ### Fonts
 
 Fonts are in `.fonts`
@@ -97,6 +114,8 @@ Here is global list of application to install :
 - lxapparence
 - rxvt-unicode
 - zsh | prezto
+- docker
+- docker-compose
 - VS Code
 - Discord Canary
 - Spotify
